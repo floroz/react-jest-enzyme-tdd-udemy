@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GuessWords from './GuessWords';
 import Congrats from './Congrats';
+import { Input } from './Input';
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <div className="container">
         <h1>Jotto</h1>
         <Congrats success={true} />
+        <Input />
         <GuessWords
           guessedWords={[
             {
