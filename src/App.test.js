@@ -1,9 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
+import { shallow } from 'enzyme';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+const setup = (props = {}, state = null) => {
+  const wrapper = shallow(<App {...props} />);
+
+  if (state) wrapper.setState(state);
+  return wrapper;
+};
+
+describe('', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = setup();
+  });
+
+  it('renders with success', () => {
+    expect(wrapper).toBeTruthy();
+  });
 });
