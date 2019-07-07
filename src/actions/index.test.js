@@ -1,9 +1,32 @@
-import { correctGuess, actionTypes } from './index';
+import moxios from 'moxios';
+import { storeFactory } from '../../test/testUtils';
+import { getSecretWord } from './index';
 
-describe('correctGuess', () => {
-  it('should return an action creator of type CORRECT_GUESS', () => {
-    const action = correctGuess();
+describe('getSecretWord action creatore', () => {
+  beforeEach(() => {
+    moxios.install();
+  });
 
-    expect(action).toEqual({ type: actionTypes.CORRECT_GUESS });
+  afterEach(() => {
+    moxios.uninstall();
+  });
+
+  it('should add a response word to the state', async () => {
+    const secretWord = 'party';
+    const store = storeFactory();
+
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: secretWord
+      });
+    });
+
+    await store.dispatch(getSecretWord());
+
+    const newState = store.getState();
+
+    expect(newState.secretWord).toBe(secretWord);
   });
 });

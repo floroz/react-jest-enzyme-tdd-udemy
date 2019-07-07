@@ -44,7 +44,6 @@ describe('render', () => {
       expect(component.length).toBe(1);
     });
     it('does not render input box', () => {
-      console.log(wrapper.debug());
       const input = findByTestAttr(wrapper, 'input-box');
       expect(input.length).toBe(0);
     });
